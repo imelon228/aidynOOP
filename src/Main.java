@@ -15,12 +15,20 @@ public class Main{
 
         System.out.println(pet1);
         System.out.println(pet2);
+        System.out.println();
+
+        // testing getters and setters
+        System.out.println(pet1.getPetID());
+        pet1.setPetID(3);
+        System.out.println(pet1.getPetID());
 
         System.out.println();
+
 
         System.out.println(own1);
         System.out.println(own2);
         System.out.println();
+
 
         System.out.println(vet1);
         System.out.println(vet2);
