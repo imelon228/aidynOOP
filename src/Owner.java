@@ -6,9 +6,9 @@ public class Owner {
 
     public Owner(int ownerID, int phone, int numberOfPets, String name){
         this.ownerID = ownerID;
-        this.phone = phone;
+        setPhone(phone);
         this.numberOfPets = numberOfPets;
-        this.name = name;
+        setName(name);
     }
     //default
     public Owner(){
@@ -37,13 +37,21 @@ public class Owner {
         this.ownerID = ownerID;
     }
     public void setPhone(int phone){
-        this.phone = phone;
+        if (phone <= 0) {
+            System.out.println("Invalid phone number of owner" + ownerID);
+        } else {
+            this.phone = phone;
+        }
     }
     public void setNumberOfPets(int numberOfPets){
         this.numberOfPets = numberOfPets;
     }
     public void setName(String name) {
-        this.name = name;
+        if (name.trim().isEmpty()) {
+            this.name = name;
+        } else {
+            System.out.println("Warning: Name cannot be empty! owner" + ownerID);
+        }
     }
 
     public void addPet(){

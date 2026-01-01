@@ -6,9 +6,9 @@ public class Veterinarian {
 
     public Veterinarian(int vetID, String name, String specialization, int experience) {
         this.vetID = vetID;
-        this.name = name;
+        setName(name);
         this.specialization = specialization;
-        this.experience = experience;
+        setExperience(experience);
     }
     // default
     public Veterinarian() {
@@ -36,13 +36,21 @@ public class Veterinarian {
         this.vetID = vetID;
     }
     public void setName(String name) {
-        this.name = name;
+        if (name.trim().isEmpty()) {
+            this.name = name;
+        } else {
+            System.out.println("Warning: Name cannot be empty! vet" + vetID);
+        }
     }
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
     }
     public void setExperience(int experience) {
-        this.experience = experience;
+        if (experience < 1){
+            System.out.println("Minimum 2 year experience! vet" + vetID);
+        } else {
+            this.experience = experience;
+        }
     }
 
     public boolean canTreat(Pet pet){

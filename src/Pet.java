@@ -6,9 +6,9 @@ public class Pet {
 
     public Pet(int petID, String name, String species, int petAge){
         this.petID = petID;
-        this.name = name;
+        setName(name);
         this.species = species;
-        this.petAge = petAge;
+        setPetAge(petAge);
     }
     // default
     public Pet(){
@@ -37,13 +37,21 @@ public class Pet {
         this.petID = petID;
     }
     public void setName(String name){
-        this.name = name;
+        if (name.trim().isEmpty()) {
+            this.name = name;
+        } else {
+            System.out.println("Warning: Name cannot be empty! pet" + petID);
+        }
     }
     public void setSpecies(String species){
         this.species = species;
     }
     public void setPetAge(int petAge){
-        this.petAge = petAge;
+        if (petAge > 0){
+            this.petAge = petAge;
+        } else {
+            System.out.println("Incorrect age of pet" + petID);
+        }
     }
 
     public boolean isYoung(){
