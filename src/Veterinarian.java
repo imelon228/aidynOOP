@@ -36,7 +36,7 @@ public class Veterinarian {
         this.vetID = vetID;
     }
     public void setName(String name) {
-        if (name.trim().isEmpty()) {
+        if (!name.trim().isEmpty()) {
             this.name = name;
         } else {
             System.out.println("Warning: Name cannot be empty! vet" + vetID);
@@ -46,8 +46,9 @@ public class Veterinarian {
         this.specialization = specialization;
     }
     public void setExperience(int experience) {
-        if (experience < 1){
+        if (experience < 2){
             System.out.println("Minimum 2 year experience! vet" + vetID);
+            this.experience = experience;
         } else {
             this.experience = experience;
         }

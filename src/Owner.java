@@ -39,6 +39,7 @@ public class Owner {
     public void setPhone(int phone){
         if (phone <= 0) {
             System.out.println("Invalid phone number of owner" + ownerID);
+            this.phone =0;
         } else {
             this.phone = phone;
         }
@@ -47,7 +48,7 @@ public class Owner {
         this.numberOfPets = numberOfPets;
     }
     public void setName(String name) {
-        if (name.trim().isEmpty()) {
+        if (!name.trim().isEmpty()) {
             this.name = name;
         } else {
             System.out.println("Warning: Name cannot be empty! owner" + ownerID);

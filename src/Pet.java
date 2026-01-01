@@ -37,7 +37,7 @@ public class Pet {
         this.petID = petID;
     }
     public void setName(String name){
-        if (name.trim().isEmpty()) {
+        if (!name.trim().isEmpty()) {
             this.name = name;
         } else {
             System.out.println("Warning: Name cannot be empty! pet" + petID);
