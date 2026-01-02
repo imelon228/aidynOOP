@@ -37,6 +37,68 @@ public class Main{
             System.out.print("Enter your choice: ");
         }
 
+        private static void addPet() {
+            System.out.println("\n--- ADD PET ---");
+            // Ask for each field
+            System.out.print("Enter pet ID: ");
+            int ID = scanner.nextInt(); // Read INT
+            System.out.print("Enter name: ");
+            String name = scanner.nextLine(); // Read String
+            scanner.nextLine(); // Consume newline
+            System.out.print("Enter species: ");
+            String species = scanner.nextLine();
+            System.out.print("Enter pet age: ");
+            int age = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            // Create new object with user's data
+            Pet item = new Pet(ID, name, species, age);
+            // Add to ArrayList
+            pets.add(item);
+            System.out.println("\n New pet added successfully!");
+        }
+        private static void addMOwner() {
+            System.out.println("\n--- ADD ONWER ---");
+            // Ask for each field
+            System.out.print("Enter owner ID: ");
+            int ID = scanner.nextInt(); // Read INT
+            System.out.print("Enter phone number: ");
+            int phone = scanner.nextInt();
+            System.out.print("Enter number of pets: ");
+            int num = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+            System.out.print("Enter name: ");
+            String name = scanner.nextLine(); // Read String
+            scanner.nextLine(); // Consume newline
+
+            // Create new object with user's data
+            Owner item = new Owner(ID, phone, num, name);
+            // Add to ArrayList
+            owns.add(item);
+            System.out.println("\n New owner added successfully!");
+        }
+        private static void addVet() {
+            System.out.println("\n--- ADD VETERINARIAN ---");
+            // Ask for each field
+            System.out.print("Enter owner ID: ");
+            int ID = scanner.nextInt(); // Read INT
+            System.out.print("Enter vet name: ");
+            String name = scanner.nextLine(); // Read string
+            scanner.nextLine();
+            System.out.print("Enter specialization: ");
+            String specialty = scanner.nextLine();
+            scanner.nextLine();
+            System.out.print("Enter experience: ");
+            int exp = scanner.nextInt(); // Read double
+            scanner.nextLine(); // Consume newline
+
+            // Create new object with user's data
+            Veterinarian item = new Veterinarian(ID, name, specialty, exp);
+            // Add to ArrayList
+            vets.add(item);
+            System.out.println("\n New veterinarian added successfully!");
+        }
+
 // Menu loop - continues until user exits
         boolean running = true;
         while (running) {
@@ -45,29 +107,29 @@ public class Main{
             scanner.nextLine(); // IMPORTANT: consume leftover newline
             switch (choice) {
                 case 1:
-                    addMenuItem();
+                    addPet();
                     break;
                 case 2:
-                    viewAllMenuItems();
+                    viewAllPets();
                     break;
                 case 3:
-                    addCustomer();
+                    addOwner();
                     break;
                 case 4:
-                    viewAllCustomers();
+                    viewAllOwners();
                     break;
                 case 5:
-                    addOrder();
+                    addVet();
                     break;
                 case 6:
-                    viewAllOrders();
+                    viewAllVets();
                     break;
                 case 0:
-                    System.out.println("\nGoodbye! "); 👋
+                    System.out.println("\nGoodbye! ");
                     running = false; // Exit loop
                     break;
                 default:
-                    System.out.println("\n Invalid choice!"); ❌
+                    System.out.println("\n Invalid choice!")
             }
             if (running) {
                 System.out.println("\nPress Enter to continue...");
@@ -78,7 +140,7 @@ public class Main{
     } // End of main method
 
 
-        System.out.println();
+
 
 
     }
