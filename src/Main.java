@@ -1,80 +1,268 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList; // Allows us to use ArrayList
-import java.util.Scanner; // Allows us to read user input
+import java.sql.SQLOutput;
+import java.util.Scanner;
+import java.util.ArrayList;
 
+public class Main {
 
-public class Main{
     private static ArrayList<Pet> pets = new ArrayList<>();
     private static ArrayList<Owner> owns = new ArrayList<>();
     private static ArrayList<Veterinarian> vets = new ArrayList<>();
+    private static ArrayList<Treatment> allTreatment = new ArrayList<>();
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public static void main (String[] args) {
 
-        pets.add(new Pet(1, "Fari", "dog", 5));
-        pets.add(new Pet(2, "Murka", "cat", 2));
+    public void main(String[] args){
 
-        owns.add(new Owner(1, 304, 3, "Aidyn"));
-        owns.add(new Owner(2, 228, 5, "Mary"));
 
-        vets.add(new Veterinarian(1, "Cade", "dog", 5));
-        vets.add(new Veterinarian(2, "Suzy", "elephant", 2));
+        System.out.println("=== Veterinary Clinic Management System ===");
+        System.out.println();
+        allTreatment.add(new Surgery(1000,30,false,"General",2));
+        allTreatment.add(new Vaccination(2000,40,false,"Rabies", 2));
 
 
 
-// Menu loop - continues until user exits
+
+        /*
+        pets.add(new Pet(1,"Rocky",2,"Dog","John Smith"));
+        pets.add(new Pet(2,"Leo",4,"Cat","Michael Johnson"));
+        pets.add(new Pet());
+
+        owners.add(new Owner(1,"John Smith","+7-777-777-77-77",1));
+        owners.add(new Owner(2,"Michael Johnson","+7-700-000-00-00",1));
+        owners.add(new Owner());
+
+        veterinarians.add(new Veterinarian(1,"Daniel Anderson","Dog",7));
+        veterinarians.add(new Veterinarian(2,"David Wilson","Cat",2));
+        veterinarians.add(new Veterinarian());
+        */
+        //Menu loop
+
         boolean running = true;
-        while (running) {
-            displayMenu(); // Show menu options
-            int choice = scanner.nextInt(); // Read user's choice
-            scanner.nextLine(); // IMPORTANT: consume leftover newline
-            switch (choice) {
+        while(running){
+            displayMenu();
+            int choice=scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice){
                 case 1:
-                    addPet();
+                    addSurgery();
                     break;
                 case 2:
-                    viewAllPets();
+                    viewSurgery();
                     break;
                 case 3:
-                    addOwner();
+                    addVaccination();
                     break;
                 case 4:
-                    viewAllOwners();
+                    viewVaccination();
                     break;
                 case 5:
-                    addVet();
+                    demonstratePolymorphism();
                     break;
                 case 6:
-                    viewAllVets();
+                    viewAllTreatment();
                     break;
                 case 0:
-                    System.out.println("\nGoodbye! ");
-                    running = false; // Exit loop
+                    System.out.println("\n Goodbye!");
+                    running = false;
                     break;
                 default:
                     System.out.println("\n Invalid choice!");
             }
-            if (running) {
-                System.out.println("\nPress Enter to continue...");
-                scanner.nextLine(); // Wait for user
+            if (running){
+                System.out.println("\n Press Enter to continue...");
+                scanner.nextLine();
             }
         }
-        scanner.close(); // Clean up
-    } // End of main method
-    private static void displayMenu() {
+        scanner.close();
+
+
+    }
+
+    private static void addSurgery(){
+        System.out.println("\n---ADD SURGERY---");
+
+        System.out.println("Enter surgery cost: ");
+        double cost=scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Enter duration: ");
+        int duration = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Enter surgery status: ");
+        boolean completed = scanner.nextBoolean();
+        scanner.nextLine();
+
+        System.out.println("Enter anesthesia type: ");
+        String anesthesiaType = scanner.nextLine();
+
+        System.out.println("Enter risk level: ");
+        int riskLevel = scanner.nextInt();
+        scanner.nextLine();
+
+        Treatment treatment = new Surgery(cost,duration,completed,anesthesiaType,riskLevel);
+        allTreatment.add(treatment);
+
+        System.out.println("\n Surgery added successfully!");
+    }
+
+    private static void addVaccination(){
+        System.out.println("\n---ADD VACCINATION---");
+
+        System.out.println("Enter vaccination cost: ");
+        double cost=scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Enter duration: ");
+        int duration = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Enter vaccination status: ");
+        boolean completed = scanner.nextBoolean();
+
+        System.out.println("Enter vaccination name: ");
+        String vaccineName = scanner.nextLine();
+
+        System.out.println("Enter number of dose: ");
+        int doseNumber = scanner.nextInt();
+        scanner.nextLine();
+
+        Treatment treatment = new Vaccination(cost,duration,completed,vaccineName,doseNumber);
+        allTreatment.add(treatment);
+
+        System.out.println("\n Vaccination added successfully!");
+    }
+
+    private static void viewSurgery(){
+        System.out.println("================================");
+        System.out.println("          Surgery only");
+        System.out.println("================================");
+
+        int surgeryCount = 0;
+        for(Treatment s: allTreatment){
+            if(s instanceof Surgery){
+                Surgery surgery = (Surgery) s;
+                surgeryCount++;
+
+                System.out.println(surgeryCount+"."+ surgery.getTreatmentName());
+                System.out.println("   Surgery cost: "+ surgery.getCost());
+                System.out.println("   Surgery duration: "+ surgery.getDuration());
+                System.out.println("   Anesthesia type: "+ surgery.getAnesthesiaType());
+                System.out.println("   Risk level: "+ surgery.getRiskLevel());
+
+                surgery.howRisky();
+
+                System.out.println();
+            }
+        }
+        if(surgeryCount==0){
+            System.out.println("No surgery found.");
+        }
+    }
+
+    private static void viewVaccination(){
+        System.out.println("================================");
+        System.out.println("          Vaccination only");
+        System.out.println("================================");
+
+        int vaccinationCount = 0;
+        for(Treatment s: allTreatment){
+            if(s instanceof Vaccination){
+                Vaccination vaccination = (Vaccination) s;
+                vaccinationCount++;
+
+                System.out.println(vaccinationCount+"."+ vaccination.getTreatmentName());
+                System.out.println("   Surgery cost: "+ vaccination.getCost());
+                System.out.println("   Surgery duration: "+ vaccination.getDuration());
+                System.out.println("   Vaccine name: "+ vaccination.getVaccineName());
+                System.out.println("   Number of dose: "+ vaccination.getDoseNumber());
+
+                if (vaccination.needsBooster()){
+                    System.out.println("Vaccine need a booster");
+                }
+
+                System.out.println();
+            }
+        }
+        if(vaccinationCount==0){
+            System.out.println("No vaccination found.");
+        }
+    }
+
+    private static void viewAllTreatment(){
+        System.out.println("\n==============================");
+        System.out.println("     ALL TREATMENT(POLYMORPHIC LIST)");
+        System.out.println("==============================");
+
+        if(allTreatment.isEmpty()){
+            System.out.println("No treatment found.");
+            return;
+        }
+
+        System.out.println("Total treatment: " + allTreatment.size());
+        System.out.println();
+
+        for (int i=0;i<allTreatment.size();i++){
+            Treatment s= allTreatment.get(i);
+
+            System.out.println((i+1) + "." + s);
+            if(s instanceof Surgery){
+                Surgery surgery = (Surgery) s;
+                surgery.howRisky();
+            } else if (s instanceof Vaccination) {
+                Vaccination vaccination =(Vaccination) s;
+                if(vaccination.needsBooster()){
+                    System.out.println("Vaccine need a booster");
+                }
+            }
+
+            System.out.println();
+
+        }
+    }
+
+    private static void demonstratePolymorphism(){
         System.out.println("\n========================================");
-        System.out.println("=== Veterinarian clinic ===");
+        System.out.println("   POLYMORPHISM DEMONSTRATION");
         System.out.println("========================================");
+        System.out.println();
+
+        for(Treatment s: allTreatment){
+            s.performTreatment();
+        }
+
+        System.out.println();
+        System.out.println("   This is POLYMORPHISM in action!");
+    }
+
+
+
+    private static void displayMenu(){
+        /*
+        System.out.println("====== VET CLINIC SYSTEM ======");
         System.out.println("1. Add Pet");
         System.out.println("2. View All Pets");
         System.out.println("3. Add Owner");
         System.out.println("4. View All Owners");
         System.out.println("5. Add Veterinarian");
-        System.out.println("6. View All Vets");
+        System.out.println("6. View All Veterinarian");
         System.out.println("0. Exit");
         System.out.println("========================================");
-        System.out.print("Enter your choice: ");
+        System.out.println("Enter choice: ");
+        */
+
+        System.out.println("===== VET CLINIC SYSTEM =====");
+        System.out.println("1. Add Surgery");
+        System.out.println("2. View Surgery");
+        System.out.println("3. Add Vaccination");
+        System.out.println("4. View Vaccination");
+        System.out.println("5. Demonstrate Polymorphism");
+        System.out.println("6. View All Treatment");
+        System.out.println("0. Exit");
+        System.out.println("==============================");
+        System.out.println("Enter choice: ");
     }
 
     private static void addPet() {

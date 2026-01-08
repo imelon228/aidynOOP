@@ -1,18 +1,18 @@
 public class Treatment {
-    protected int treatmentID;
+    protected String treatmentName;
     protected double cost;
     protected int duration;
     protected boolean completed;
 
-    public Treatment(int treatmentID, double cost, int duration, boolean completed){
-        this.treatmentID=treatmentID;
+    public Treatment(String treatmentName, double cost, int duration, boolean completed){
+        this.treatmentName=treatmentName;
         this.cost=cost;
         this.duration=duration;
         this.completed=completed;
     }
 
-    public int getTreatmentID() {
-        return treatmentID;
+    public String getTreatmentName() {
+        return treatmentName;
     }
 
     public double getCost() {
@@ -28,7 +28,7 @@ public class Treatment {
     }
 
     public void setTreatmentName(String treatmentName) {
-        this.treatmentID = treatmentID;
+        this.treatmentName = treatmentName;
     }
 
     public void setCost(double cost) {
@@ -46,7 +46,7 @@ public class Treatment {
 
 
     public void performTreatment(){
-        System.out.println("Treatment number: " + treatmentID);
+        System.out.println("Performing treatment: " + treatmentName);
     }
 
     public double calculateCost() {
@@ -54,11 +54,11 @@ public class Treatment {
     }
 
     public void showDetails(){
-        System.out.println("Treatment ID: " + treatmentID + "\nDurations: "+ duration + " minutes");
+        System.out.println("Treatment name: " + treatmentName + "\nDurations: "+ duration + " minutes");
     }
 
     @Override
     public String toString() {
-        return "Treatment ID: "+treatmentID+ ", Cost: "+ cost +", Durations: " + duration + " minutes" + ", Status: "+completed;
+        return "Treatment name: "+treatmentName+ ", Cost: "+ cost +", Durations: " + duration + " minutes" + ", Status: "+completed;
     }
 }
