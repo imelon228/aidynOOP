@@ -258,7 +258,7 @@ public class Main {
         System.out.println("2. View Surgery");
         System.out.println("3. Add Vaccination");
         System.out.println("4. View Vaccination");
-        System.out.println("5. Demonstrate Polymorphism");
+        System.out.println("5. Show Polymorphism");
         System.out.println("6. View All Treatment");
         System.out.println("0. Exit");
         System.out.println("==============================");
