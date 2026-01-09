@@ -19,7 +19,7 @@ public class Main {
         System.out.println();
         allTreatment.add(new Surgery(100,30,false,"General",2));
         allTreatment.add(new Vaccination(200,60,true,"aspirin", 2));
-
+        allTreatment.add(new Treatment("robo",300,40,false));
 
 
         boolean running = true;
