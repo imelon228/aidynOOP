@@ -28,7 +28,7 @@ public class Surgery extends Treatment{
 
     @Override
     public void performTreatment() {
-        System.out.println("Performing surgery with " + anesthesiaType + " anesthesia");
+        System.out.println("Surgery with " + anesthesiaType + " anesthesia");
         completed = true;
     }
 

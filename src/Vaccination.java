@@ -28,7 +28,7 @@ public class Vaccination extends Treatment{
 
     @Override
     public void performTreatment() {
-        System.out.println("Administering vaccine: " + vaccineName);
+        System.out.println("Providing vaccine: " + vaccineName);
         completed = true;
     }
 

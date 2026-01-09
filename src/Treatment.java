@@ -46,7 +46,7 @@ public class Treatment {
 
 
     public void performTreatment(){
-        System.out.println("Performing treatment: " + treatmentName);
+        System.out.println("Working treatment: " + treatmentName);
     }
 
     public double calculateCost() {
