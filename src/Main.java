@@ -17,26 +17,10 @@ public class Main {
 
         System.out.println("=== Veterinary Clinic Management System ===");
         System.out.println();
-        allTreatment.add(new Surgery(1000,30,false,"General",2));
-        allTreatment.add(new Vaccination(2000,40,false,"Rabies", 2));
+        allTreatment.add(new Surgery(100,30,false,"General",2));
+        allTreatment.add(new Vaccination(200,60,true,"aspirin", 2));
 
 
-
-
-        /*
-        pets.add(new Pet(1,"Rocky",2,"Dog","John Smith"));
-        pets.add(new Pet(2,"Leo",4,"Cat","Michael Johnson"));
-        pets.add(new Pet());
-
-        owners.add(new Owner(1,"John Smith","+7-777-777-77-77",1));
-        owners.add(new Owner(2,"Michael Johnson","+7-700-000-00-00",1));
-        owners.add(new Owner());
-
-        veterinarians.add(new Veterinarian(1,"Daniel Anderson","Dog",7));
-        veterinarians.add(new Veterinarian(2,"David Wilson","Cat",2));
-        veterinarians.add(new Veterinarian());
-        */
-        //Menu loop
 
         boolean running = true;
         while(running){
@@ -91,12 +75,13 @@ public class Main {
         int duration = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.println("Enter surgery status: ");
+        System.out.println("Enter surgery status (true or false): ");
         boolean completed = scanner.nextBoolean();
         scanner.nextLine();
 
         System.out.println("Enter anesthesia type: ");
         String anesthesiaType = scanner.nextLine();
+        scanner.nextLine();
 
         System.out.println("Enter risk level: ");
         int riskLevel = scanner.nextInt();
@@ -119,11 +104,13 @@ public class Main {
         int duration = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.println("Enter vaccination status: ");
+        System.out.println("Enter vaccination status (true or false): ");
         boolean completed = scanner.nextBoolean();
+        scanner.nextLine();
 
         System.out.println("Enter vaccination name: ");
         String vaccineName = scanner.nextLine();
+        scanner.nextLine();
 
         System.out.println("Enter number of dose: ");
         int doseNumber = scanner.nextInt();
@@ -234,24 +221,12 @@ public class Main {
         }
 
         System.out.println();
-        System.out.println("   This is POLYMORPHISM in action!");
+        System.out.println("This is POLYMORPHISM in action!");
     }
 
 
 
     private static void displayMenu(){
-        /*
-        System.out.println("====== VET CLINIC SYSTEM ======");
-        System.out.println("1. Add Pet");
-        System.out.println("2. View All Pets");
-        System.out.println("3. Add Owner");
-        System.out.println("4. View All Owners");
-        System.out.println("5. Add Veterinarian");
-        System.out.println("6. View All Veterinarian");
-        System.out.println("0. Exit");
-        System.out.println("========================================");
-        System.out.println("Enter choice: ");
-        */
 
         System.out.println("===== VET CLINIC SYSTEM =====");
         System.out.println("1. Add Surgery");
