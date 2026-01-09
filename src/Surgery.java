@@ -5,7 +5,7 @@ public class Surgery extends Treatment{
     public Surgery(double cost, int duration, boolean completed, String anesthesiaType, int riskLevel){
         super("Surgery", cost, duration, completed);
         this.anesthesiaType=anesthesiaType;
-        this.riskLevel=riskLevel;
+        setRiskLevel(riskLevel);
     }
 
     public int getRiskLevel() {
