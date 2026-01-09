@@ -5,7 +5,7 @@ public class Vaccination extends Treatment{
     public Vaccination(double cost, int duration, boolean completed, String vaccineName, int doseNumber){
         super("Vaccination", cost, duration, completed);
         this.vaccineName = vaccineName;
-        this.doseNumber = doseNumber;
+        setDoseNumber(doseNumber);
     }
 
     public String getVaccineName() {

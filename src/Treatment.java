@@ -6,8 +6,8 @@ public class Treatment {
 
     public Treatment(String treatmentName, double cost, int duration, boolean completed){
         this.treatmentName=treatmentName;
-        this.cost=cost;
-        this.duration=duration;
+        setCost(cost);
+        setDuration(duration);
         this.completed=completed;
     }
 
