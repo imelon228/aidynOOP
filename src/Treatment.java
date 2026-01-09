@@ -11,6 +11,7 @@ public class Treatment {
         this.completed=completed;
     }
 
+
     public String getTreatmentName() {
         return treatmentName;
     }
