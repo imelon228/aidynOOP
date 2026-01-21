@@ -1,3 +1,5 @@
+package Entities;
+
 public class Veterinarian {
     private int vetID;
     private String name;
@@ -63,7 +65,7 @@ public class Veterinarian {
 
     @Override
     public String toString() {
-        return "Veterinarian{" +
+        return "Entities.Veterinarian{" +
                 "vetID=" + vetID +
                 ", name='" + name + '\'' +
                 ", specialization='" + specialization + '\'' +

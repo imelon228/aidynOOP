@@ -1,10 +1,12 @@
-public class Vaccination extends Treatment{
+package Entities;
+
+public class Vaccination extends Treatment implements Performable {
     private String vaccineName;
     private int doseNumber;
 
     public Vaccination(double cost, int duration, boolean completed, String vaccineName, int doseNumber){
         super("Vaccination", cost, duration, completed);
-        this.vaccineName = vaccineName;
+        setVaccineName(vaccineName);
         setDoseNumber(doseNumber);
     }
 
@@ -17,11 +19,19 @@ public class Vaccination extends Treatment{
     }
 
     public void setVaccineName(String vaccineName) {
-        this.vaccineName = vaccineName;
+        if(vaccineName == null || vaccineName.trim().isEmpty()){
+            throw new IllegalArgumentException("Not appropriate value");
+        } else {
+            this.vaccineName = vaccineName;
+        }
     }
 
     public void setDoseNumber(int doseNumber) {
-        if(doseNumber>=0)this.doseNumber = doseNumber;
+        if(doseNumber>=0){
+            this.doseNumber = doseNumber;
+        } else{
+            throw new IllegalArgumentException("Number should be >= 0");
+        }
     }
 
 
@@ -35,6 +45,11 @@ public class Vaccination extends Treatment{
     @Override
     public double calculateCost() {
         return cost * doseNumber;
+    }
+
+    @Override
+    public void check(){
+        System.out.println("Check temperature and allergies before vaccination");
     }
 
 

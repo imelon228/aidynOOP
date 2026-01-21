@@ -1,3 +1,5 @@
+package Entities;
+
 public class Pet {
     private int petID;
     private String name;
@@ -71,7 +73,7 @@ public class Pet {
 
     @Override
     public String toString() {
-        return "Pet{" +
+        return "Entities.Pet{" +
                 "petID=" + petID +
                 ", name='" + name + '\'' +
                 ", species='" + species + '\'' +

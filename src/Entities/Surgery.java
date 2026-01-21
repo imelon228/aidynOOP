@@ -1,10 +1,14 @@
-public class Surgery extends Treatment{
+package Entities;
+
+import exception.InvalidInputException;
+
+public class Surgery extends Treatment implements Performable{
     private String anesthesiaType;
     private int riskLevel;
 
     public Surgery(double cost, int duration, boolean completed, String anesthesiaType, int riskLevel){
         super("Surgery", cost, duration, completed);
-        this.anesthesiaType=anesthesiaType;
+        setAnesthesiaType(anesthesiaType);
         setRiskLevel(riskLevel);
     }
 
@@ -17,11 +21,22 @@ public class Surgery extends Treatment{
     }
 
     public void setRiskLevel(int riskLevel) {
-        if(riskLevel>=0)this.riskLevel = riskLevel;
+        if(riskLevel>=0){
+            this.riskLevel = riskLevel;
+        } else {
+            throw new IllegalArgumentException("Number should be >= 0");
+
+        }
     }
+    // Then catch it:
+
 
     public void setAnesthesiaType(String anesthesiaType) {
-        this.anesthesiaType = anesthesiaType;
+        if(anesthesiaType == null || anesthesiaType.trim().isEmpty()){
+            throw new IllegalArgumentException("Not appropriate value");
+        } else {
+            this.anesthesiaType = anesthesiaType;
+        }
     }
 
 
@@ -35,6 +50,11 @@ public class Surgery extends Treatment{
     @Override
     public double calculateCost() {
         return cost + riskLevel * 100;
+    }
+
+    @Override
+    public void check(){
+        System.out.println("Perform blood tests and anesthesia consultation");
     }
 
     public void showAnesthesiaType() {

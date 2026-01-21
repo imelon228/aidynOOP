@@ -1,21 +1,28 @@
-public class Treatment {
+package Entities;
+
+public abstract class Treatment {
     protected String treatmentName;
     protected double cost;
     protected int duration;
     protected boolean completed;
 
     public Treatment(String treatmentName, double cost, int duration, boolean completed){
-        this.treatmentName=treatmentName;
+        setTreatmentName(treatmentName);
         setCost(cost);
         setDuration(duration);
-        this.completed=completed;
+        setCompleted(completed);
     }
 
+    public void setTreatmentName(String treatmentName) {
+        if (treatmentName == null || treatmentName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Treatment name cannot be empty");
 
-    public String getTreatmentName() {
+        }
+        this.treatmentName = treatmentName;
+    }
+    public String getTreatmentName(){
         return treatmentName;
     }
-
     public double getCost() {
         return cost;
     }
@@ -28,10 +35,6 @@ public class Treatment {
         return completed;
     }
 
-    public void setTreatmentName(String treatmentName) {
-        this.treatmentName = treatmentName;
-    }
-
     public void setCost(double cost) {
         if(cost>=0) this.cost = cost;
     }
@@ -41,20 +44,21 @@ public class Treatment {
     }
 
     public void setCompleted(boolean completed) {
-        this.completed = completed;
+        if(completed != true && completed != false){
+            throw new IllegalArgumentException("Logic Error");
+            }
+        else {
+            this.completed = completed;
+        }
     }
 
 
 
-    public void performTreatment(){
-        System.out.println("Working treatment: " + treatmentName);
-    }
+    public abstract void performTreatment();
 
-    public double calculateCost() {
-        return cost;
-    }
+    public abstract double calculateCost();
 
-    public void showDetails(){
+    public  void showDetails(){
         System.out.println("Treatment name: " + treatmentName + "\nDurations: "+ duration + " minutes");
     }
 

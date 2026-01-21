@@ -1,3 +1,5 @@
+package Entities;
+
 public class Owner {
     private int ownerID;
     private int phone;
@@ -64,7 +66,7 @@ public class Owner {
 
     @Override
     public String toString() {
-        return "Owner{" +
+        return "Entities.Owner{" +
                 "ownerID=" + ownerID +
                 ", phone=" + phone +
                 ", numberOfPets=" + numberOfPets +
