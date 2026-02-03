@@ -4,8 +4,8 @@ public class Vaccination extends Treatment implements Performable {
     private String vaccineName;
     private int doseNumber;
 
-    public Vaccination(double cost, int duration, boolean completed, String vaccineName, int doseNumber){
-        super("Vaccination", cost, duration, completed);
+    public Vaccination(int treatmentID, double cost, boolean completed, String vaccineName, int doseNumber){
+        super(treatmentID, "Vaccination", cost, completed);
         setVaccineName(vaccineName);
         setDoseNumber(doseNumber);
     }

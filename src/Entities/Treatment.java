@@ -1,16 +1,27 @@
 package Entities;
 
 public abstract class Treatment {
+    protected int treatmentID;
     protected String treatmentName;
     protected double cost;
-    protected int duration;
     protected boolean completed;
 
-    public Treatment(String treatmentName, double cost, int duration, boolean completed){
+    public Treatment(int treatmentID, String treatmentName, double cost, boolean completed){
+        setTreatmentID(treatmentID);
         setTreatmentName(treatmentName);
         setCost(cost);
-        setDuration(duration);
         setCompleted(completed);
+    }
+    public void setTreatmentID(int treatmentID){
+        if (treatmentID>0){
+            this.treatmentID = treatmentID;
+        } else {
+            throw new IllegalArgumentException("Invalid ID");
+        }
+    } // for vetclinic_db
+
+    public int getTreatmentID(){
+        return treatmentID;
     }
 
     public void setTreatmentName(String treatmentName) {
@@ -27,10 +38,6 @@ public abstract class Treatment {
         return cost;
     }
 
-    public int getDuration() {
-        return duration;
-    }
-
     public boolean getComplete(){
         return completed;
     }
@@ -39,9 +46,7 @@ public abstract class Treatment {
         if(cost>=0) this.cost = cost;
     }
 
-    public void setDuration(int duration) {
-        if (duration>=0)this.duration = duration;
-    }
+
 
     public void setCompleted(boolean completed) {
         if(completed != true && completed != false){
@@ -59,11 +64,11 @@ public abstract class Treatment {
     public abstract double calculateCost();
 
     public  void showDetails(){
-        System.out.println("Treatment name: " + treatmentName + "\nDurations: "+ duration + " minutes");
+        System.out.println("Treatment ID: " + treatmentID + "Treatment name: " + treatmentName + "\nDurations: ");
     }
 
     @Override
     public String toString() {
-        return "Treatment name: "+treatmentName+ ", Cost: "+ cost +", Durations: " + duration + " minutes" + ", Status: "+completed;
+        return "Treatment ID: " + treatmentID + "Treatment name: "+treatmentName+ ", Cost: "+ cost +", Durations: " + " minutes" + ", Status: "+completed;
     }
 }

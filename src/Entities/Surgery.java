@@ -6,8 +6,8 @@ public class Surgery extends Treatment implements Performable{
     private String anesthesiaType;
     private int riskLevel;
 
-    public Surgery(double cost, int duration, boolean completed, String anesthesiaType, int riskLevel){
-        super("Surgery", cost, duration, completed);
+    public Surgery(int treatmentID, double cost, boolean completed, String anesthesiaType, int riskLevel){
+        super(treatmentID, "Surgery", cost, completed);
         setAnesthesiaType(anesthesiaType);
         setRiskLevel(riskLevel);
     }

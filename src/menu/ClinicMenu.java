@@ -2,6 +2,8 @@ package menu;
 
 import Entities.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -14,8 +16,8 @@ public class ClinicMenu implements Menu {
 
     @Override
     public void run(){
-        allTreatment.add(new Surgery(100,30,false,"General",2));
-        allTreatment.add(new Vaccination(200,60,true,"aspirin", 2));
+        //allTreatment.add(new Surgery(100,30,false,"General",2));
+        //allTreatment.add(new Vaccination(200,60,true,"aspirin", 2));
 
 
         boolean running = true;
@@ -69,12 +71,12 @@ public class ClinicMenu implements Menu {
         try {
             System.out.println("\n---ADD SURGERY---");
 
-            System.out.println("Enter surgery cost: ");
-            double cost = scanner.nextInt();
+            System.out.println("Enter treatment ID: ");
+            int treatmentID = scanner.nextInt();
             scanner.nextLine();
 
-            System.out.println("Enter duration: ");
-            int duration = scanner.nextInt();
+            System.out.println("Enter surgery cost: ");
+            double cost = scanner.nextInt();
             scanner.nextLine();
 
             System.out.println("Enter surgery status (true or false): ");
@@ -89,7 +91,7 @@ public class ClinicMenu implements Menu {
             int riskLevel = scanner.nextInt();
             scanner.nextLine();
 
-            Treatment treatment = new Surgery(cost, duration, completed, anesthesiaType, riskLevel);
+            Treatment treatment = new Surgery(treatmentID, cost, completed, anesthesiaType, riskLevel);
             allTreatment.add(treatment);
 
             System.out.println("\n Surgery added successfully!");
@@ -101,12 +103,13 @@ public class ClinicMenu implements Menu {
     private static void addVaccination(){
         System.out.println("\n---ADD VACCINATION---");
         try {
-            System.out.println("Enter vaccination cost: ");
-            double cost = scanner.nextInt();
+
+            System.out.println("Enter treatment ID: ");
+            int treatmentID = scanner.nextInt();
             scanner.nextLine();
 
-            System.out.println("Enter duration: ");
-            int duration = scanner.nextInt();
+            System.out.println("Enter vaccination cost: ");
+            double cost = scanner.nextInt();
             scanner.nextLine();
 
             System.out.println("Enter vaccination status (true or false): ");
@@ -121,7 +124,7 @@ public class ClinicMenu implements Menu {
             int doseNumber = scanner.nextInt();
             scanner.nextLine();
 
-            Treatment treatment = new Vaccination(cost, duration, completed, vaccineName, doseNumber);
+            Treatment treatment = new Vaccination(treatmentID, cost, completed, vaccineName, doseNumber);
             allTreatment.add(treatment);
 
             System.out.println("\n Vaccination added successfully!");
@@ -130,6 +133,7 @@ public class ClinicMenu implements Menu {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
 
     private static void viewSurgery() {
         try {
@@ -143,9 +147,9 @@ public class ClinicMenu implements Menu {
                     Surgery surgery = (Surgery) s;
                     surgeryCount++;
 
-                    System.out.println(surgeryCount + "." + surgery.getTreatmentName());
+                    System.out.println(surgeryCount + "." + surgery.getTreatmentID());
+                    System.out.println("   Treatment name: " + "Surgery");
                     System.out.println("   Surgery cost: " + surgery.getCost());
-                    System.out.println("   Surgery duration: " + surgery.getDuration());
                     System.out.println("   Anesthesia type: " + surgery.getAnesthesiaType());
                     System.out.println("   Risk level: " + surgery.getRiskLevel());
 
@@ -176,9 +180,9 @@ public class ClinicMenu implements Menu {
                     Vaccination vaccination = (Vaccination) s;
                     vaccinationCount++;
 
-                    System.out.println(vaccinationCount + "." + vaccination.getTreatmentName());
+                    System.out.println(vaccinationCount + "." + vaccination.getTreatmentID());
+                    System.out.println("   Treatment name: " + "Vaccination");
                     System.out.println("   Surgery cost: " + vaccination.getCost());
-                    System.out.println("   Surgery duration: " + vaccination.getDuration());
                     System.out.println("   Vaccine name: " + vaccination.getVaccineName());
                     System.out.println("   Number of dose: " + vaccination.getDoseNumber());
 
