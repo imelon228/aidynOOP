@@ -53,6 +53,11 @@ public class Surgery extends Treatment implements Performable{
     }
 
     @Override
+    public String getTreatment(){
+        return "Surgery";
+    }
+
+    @Override
     public void check(){
         System.out.println("Perform blood tests and anesthesia consultation");
     }

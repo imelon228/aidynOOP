@@ -63,6 +63,8 @@ public abstract class Treatment {
 
     public abstract double calculateCost();
 
+    public abstract String getTreatment();
+
     public  void showDetails(){
         System.out.println("Treatment ID: " + treatmentID + "Treatment name: " + treatmentName + "\nDurations: ");
     }

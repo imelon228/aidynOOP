@@ -48,6 +48,11 @@ public class Vaccination extends Treatment implements Performable {
     }
 
     @Override
+    public String getTreatment(){
+        return "Vaccination";
+    }
+
+    @Override
     public void check(){
         System.out.println("Check temperature and allergies before vaccination");
     }
