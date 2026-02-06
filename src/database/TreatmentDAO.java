@@ -43,7 +43,7 @@ public class TreatmentDAO {
         return false;
     }
 
-    public boolean insertSurgery(Surgery surgery){
+    public boolean insertSurgery(Surgery surgery) {
         String sql = "INSERT INTO treatment (treatment_name, cost, is_completed, anesthesia_type, risk_level) " +
                 "VALUES (?, ?, ?, ?, ?)";
 
@@ -149,20 +149,20 @@ public class TreatmentDAO {
         return vaccinations;
     }
 
-    public List<Surgery> getAllSurgery(){
+    public List<Surgery> getAllSurgery() {
         List<Surgery> surgeries = new ArrayList<>();
         String sql = "SELECT * FROM treatment WHERE treatment_name = 'SURGERY' ORDER BY treatment_id";
 
         Connection connection = DatabaseConnection.getConnection();
-        if(connection == null) return surgeries;
+        if (connection == null) return surgeries;
 
-        try{
+        try {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 Treatment treatment = extractTreatmentFromResultSet(resultSet);
-                if(treatment instanceof Surgery){
+                if (treatment instanceof Surgery) {
                     surgeries.add((Surgery) treatment);
                 }
             }
@@ -171,7 +171,7 @@ public class TreatmentDAO {
             statement.close();
 
             System.out.println("✅ Retrieved " + surgeries.size() + " surgeries");
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("❌ Select vaccinations failed!");
             e.printStackTrace();
         } finally {
@@ -220,6 +220,7 @@ public class TreatmentDAO {
         Connection connection = DatabaseConnection.getConnection();
         if (connection == null) return false;
 
+
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setDouble(1, vaccination.getCost());
@@ -248,14 +249,14 @@ public class TreatmentDAO {
         return false;
     }
 
-    public boolean updateSurgery(Surgery surgery){
+        public boolean updateSurgery(Surgery surgery) {
         String sql = "UPDATE treatment SET cost = ?, is_completed = ?, anesthesia_type = ?, risk_level = ?"
                 + "WHERE treatment_id = ? AND treatment_name = 'SURGERY'";
 
         Connection connection = DatabaseConnection.getConnection();
-        if(connection == null) return false;
+        if (connection == null) return false;
 
-        try{
+        try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setDouble(1, surgery.getCost());
             statement.setBoolean(2, surgery.getComplete());
@@ -267,16 +268,16 @@ public class TreatmentDAO {
             int rowsUpdated = statement.executeUpdate();
             statement.close();
 
-            if(rowsUpdated>0){
+            if (rowsUpdated > 0) {
                 System.out.println("✅ Surgery updated: " + surgery.getAnesthesiaType());
                 return true;
-            }else{
+            } else {
                 System.out.println("⚠️ No surgery found with ID: " + surgery.getTreatment());
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("❌ Update Vaccination failed!");
             e.printStackTrace();
-        }finally {
+        } finally {
             DatabaseConnection.closeConnection(connection);
         }
         return false;
@@ -313,46 +314,45 @@ public class TreatmentDAO {
     }
 
     public List<Treatment> searchByName(String treatment_name) {
-        List<Treatment> treatmentList = new ArrayList<>();
+            List<Treatment> treatmentList = new ArrayList<>();
 
-        // ILIKE for case-insensitive search, % for partial match
-        String sql = "SELECT * FROM treatment WHERE treatment_name ILIKE ? ORDER BY treatment_name";
+            // ILIKE for case-insensitive search, % for partial match
+            String sql = "SELECT * FROM treatment WHERE treatment_name ILIKE ? ORDER BY treatment_name";
 
-        Connection connection = DatabaseConnection.getConnection();
-        if (connection == null) return treatmentList;
+            Connection connection = DatabaseConnection.getConnection();
+            if (connection == null) return treatmentList;
 
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, "%" + treatment_name + "%");  // % = wildcard
+            try {
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setString(1, "%" + treatment_name + "%");  // % = wildcard
 
-            ResultSet resultSet = statement.executeQuery();
+                ResultSet resultSet = statement.executeQuery();
 
-            while (resultSet.next()) {
-                Treatment treatment = extractTreatmentFromResultSet(resultSet);
-                if (treatment != null) {
-                    treatmentList.add(treatment);
+                while (resultSet.next()) {
+                    Treatment treatment = extractTreatmentFromResultSet(resultSet);
+                    if (treatment != null) {
+                        treatmentList.add(treatment);
+                    }
                 }
+
+                resultSet.close();
+                statement.close();
+
+                System.out.println("✅ Found " + treatmentList.size() + " treatment matching '" + treatment_name + "'");
+
+            } catch (SQLException e) {
+                System.out.println("❌ Search by treatment name failed!");
+                e.printStackTrace();
+            } finally {
+                DatabaseConnection.closeConnection(connection);
             }
 
-            resultSet.close();
-            statement.close();
-
-            System.out.println("✅ Found " + treatmentList.size() + " treatment matching '" + treatment_name + "'");
-
-        } catch (SQLException e) {
-            System.out.println("❌ Search by treatment name failed!");
-            e.printStackTrace();
-        } finally {
-            DatabaseConnection.closeConnection(connection);
+            return treatmentList;
         }
-
-        return treatmentList;
-    }
-
     public List<Treatment> searchByCostRange(double minCost, double maxCost) {
         List<Treatment> treatmentList = new ArrayList<>();
 
-        String sql = "SELECT * FROM treatment WHERE cost BETWEEN ? AND ? ORDER BY cost DESC";
+        String sql = "SELECT * FROM treatment WHERE cost BETWEEN ? AND ? ORDER BY ASC";
 
         Connection connection = DatabaseConnection.getConnection();
         if (connection == null) return treatmentList;
@@ -364,28 +364,23 @@ public class TreatmentDAO {
 
             ResultSet resultSet = statement.executeQuery();
 
-            while (resultSet.next()) {
+            while (resultSet.next()){
                 Treatment treatment = extractTreatmentFromResultSet(resultSet);
-                if (treatment != null) {
+                if (treatment != null){
                     treatmentList.add(treatment);
                 }
             }
-
             resultSet.close();
             statement.close();
-
-            System.out.println("✅ Found " + treatmentList.size() + " treatment in cost range " +
-                    minCost + " - " + maxCost);
-
-        } catch (SQLException e) {
-            System.out.println("❌ Search by cost failed!");
+        } catch (SQLException e){
             e.printStackTrace();
-        } finally {
+        }
+        finally {
             DatabaseConnection.closeConnection(connection);
         }
-
         return treatmentList;
     }
+
 
     public List<Treatment> searchByMinCost(double minCost) {
         List<Treatment> treatmentList = new ArrayList<>();
@@ -422,7 +417,6 @@ public class TreatmentDAO {
 
         return treatmentList;
     }
-
 
 
     public void displayAllTreatment() {
@@ -463,7 +457,6 @@ public class TreatmentDAO {
 
         System.out.println("========================================\n");
     }
-
     private Treatment extractTreatmentFromResultSet(ResultSet resultSet) throws SQLException {
         int treatmentId = resultSet.getInt("treatment_id");
         String treatmentName = resultSet.getString("treatment_name");
